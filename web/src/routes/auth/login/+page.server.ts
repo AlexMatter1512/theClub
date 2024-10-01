@@ -19,7 +19,7 @@ export const actions = {
 			}
 			// throw error(500, 'Something went wrong logging in');
 		}
-
+		console.log("redirecting to /private/dashboard");
 		throw redirect(303, '/private/dashboard');
 	}
 };

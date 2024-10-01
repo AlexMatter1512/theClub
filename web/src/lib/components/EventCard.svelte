@@ -4,7 +4,7 @@
     import { onMount } from "svelte";
 
     export let edit = false;
-
+    export let backgroud = "base-100";
     export let evento: Evento = {
         id: "0",
         nome: "Event Title",
@@ -22,7 +22,7 @@
 
 </script>
 
-<div class="card bg-base-100 min-w-80 lg:card-side shadow-xl p-2">
+<div class="card bg-{backgroud} min-w-80 lg:card-side shadow-xl p-2">
     <figure>
       <img class="max-h-64 rounded-2xl"
         src={evento.poster}

@@ -12,6 +12,7 @@ export async function handle({ event, resolve }) {
     } else {
         event.locals.user = undefined;
     }
+    console.log("hooks: user: ",event.locals.user);
 
     try {
         // get an up-to-date auth store state by verifying and refreshing the loaded auth model (if any)
@@ -25,13 +26,15 @@ export async function handle({ event, resolve }) {
         }
     } catch (_) {
         // clear the auth store on failed refresh 
+        console.log("hooks: failed to refresh auth");
         event.locals.pb.authStore.clear();
     }
 
     const response = await resolve(event);
 
     // send back the default 'pb_auth' cookie to the client with the latest store state
-    response.headers.append('set-cookie', event.locals.pb.authStore.exportToCookie({secure: false}));
+    // TODO: remove the 'secure: false' option when deploying to a secure environment
+    response.headers.append('set-cookie', event.locals.pb.authStore.exportToCookie({secure: false, sameSite: 'lax'}));
 
     return response;
 }

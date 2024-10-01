@@ -16,11 +16,9 @@
     </div>
 </div>
 
-<div class="flex justify-around flex-wrap gap-1">
+<div class="flex justify-around flex-wrap gap-4">
     {#each eventi as evento}
-        <div class="carousel-item">
-            <EventCard evento={evento} edit={data.user.owner} />
-        </div>
+        <EventCard backgroud={"base-300"} evento={evento} edit={data.user.owner} />
     {/each}
 
 </div>

@@ -1,6 +1,7 @@
 <script lang="ts">
 
     import { BaseUrl, qrcodeBaseUrl } from "$lib/constants";
+    import { onMount } from "svelte";
     export let code;
     export let title = true;
     export let subtitle = true;
@@ -18,7 +19,7 @@
         <p class="text-sm text-gray-500 mb-4">Puoi trovare questo codice sul tuo <a class="text-primary" href="/me/eventi">profilo!</a></p>
     {/if}
     {#if !qrLoaded}
-        si ma dammi il tempo...
+        <span class="loading loading-ring loading-lg"></span>
     {/if}
-    <img src="{src}" alt="qrcode" on:load={() => qrLoaded = true} class={qrLoaded ? '' : 'invisible'} />
+    <img src="{src}" alt="qrcode" onload={() => qrLoaded = true} class={qrLoaded === true ? "" : "invisible"}/>
 </div>

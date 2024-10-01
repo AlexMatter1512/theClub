@@ -18,11 +18,11 @@
     </div>
 </div>
 
-<div class="carousel carousel-center bg-base-300 space-x-4 p-4 w-screen">
+<div class="carousel carousel-center bg-base-300 space-x-4 -mx-4 p-4 w-screen">
 
   {#each eventi as evento}
     <div class="carousel-item">
-      <EventCard evento={evento} edit={data.user.owner} />
+      <EventCard backgroud={"base-100"} evento={evento} edit={data.user.owner} />
     </div>
   {/each}
 </div>

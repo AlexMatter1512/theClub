@@ -7,26 +7,15 @@
     export let data;
     export let form;
 
-    const evento: Evento = data.evento;
-    const liste: Iscrizione[] = data.listeEvento;
     const cliente: Cliente = data.cliente;
-
-    // this is used if the user is already in a list and we dont want him to register again
-    let prenotato = false
-    // this is used to check if the user is already in a list but the user can still register to another list
-    const isUserInLista = new Map<string, boolean>();
-    // when one of the above is used the other is not used
-
-    liste.forEach(lista => {
-        const isInLista = lista.prenotati.some(prenotato => prenotato.includes(cliente.id));
-        isUserInLista.set(lista.id, isInLista);
-        if (isInLista) prenotato = true;
-    });
+    const evento: Evento | undefined = data.evento;
+    const listeEvento = data.listeEvento;
+    const iscritto: boolean = data.iscritto;
 
 </script>
 
 {#if form?.status === 200}
-    <Modal title="QR Code">
+    <Modal>
         <QrCode code={form.body.code}/>
     </Modal>
 {/if}
@@ -38,12 +27,12 @@
 </div>
 
 
-{#if liste.length < 1}
+{#if listeEvento?.length < 1}
     <div class="text-center my-4">
         <h2 class="text-2xl font-semibold">Non ci sono liste disponibili per questo evento</h2>
     </div>
 {:else}
-    {#if !prenotato}
+    {#if !iscritto}
         <!-- content here -->
         <div class="text-center my-4">
             <h2 class="text-2xl font-semibold">Seleziona la lista con cui entrerai all'evento</h2>
@@ -55,24 +44,20 @@
     {/if}
 {/if}
 
-{#if !prenotato}
-    {#each liste as lista}
+{#if !iscritto}
+    {#each listeEvento as listaEvento}
     <div class="flex flex-col items-center px-4">
         <div class="collapse collapse-arrow my-2 max-w-md bg-base-300">
             <input type="radio" name="my-accordion-2"/>
-            <div class="collapse-title text-xl font-medium">{lista.expand.lista.nome}</div>
+            <div class="collapse-title text-xl font-medium">{listaEvento.expand.lista.nome}</div>
             <div class="collapse-content">
-                {#if isUserInLista.get(lista.id)}
-                    <p class="mb-2">Sei già registrato con questa lista</p>
-                {:else}
-                    <form method="POST" action={`/eventi/${evento.id}/registrati/?/registrati`}>
-                        <input type="hidden" name="id_lista" value="{lista.expand.lista.id}">
-                        <p class="mb-2"><b>PR:</b> {lista.expand.lista.nome_pr}</p>
-                        <button type="submit" class="btn btn-sm w-full btn-primary">
-                            registrati
-                        </button>
-                    </form>
-                {/if}
+                <form method="POST" action={`/eventi/${evento?.id}/registrati/?/registrati`}>
+                    <input type="hidden" name="id_listaEvento" value="{listaEvento.id}">
+                    <p class="mb-2"><b>PR:</b> {listaEvento.expand.lista.nome_pr}</p>
+                    <button type="submit" class="btn btn-sm w-full btn-primary">
+                        registrati
+                    </button>
+                </form>
             </div>
         </div>
     </div>

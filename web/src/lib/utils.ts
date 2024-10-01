@@ -2,11 +2,17 @@ export function generateRandomUsername(name: string) {
     return name + Math.floor(Math.random() * 1000);
 }
 
-export function formatDate(date: Date) {
-    const day = String(date.getUTCDate()).padStart(2, '0');
-    const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Months are 0-based
-    const hours = String(date.getUTCHours()).padStart(2, '0');
-    const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+export function formatDate(date: Date) // for display
+{
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
     
     return `${day}/${month} ${hours}:${minutes}`;
+}
+
+export function getDateString(date: string) // for javascript
+{
+    return new Date(date).toISOString().slice(0, 16);
 }

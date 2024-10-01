@@ -1,23 +1,22 @@
-import type { Evento, Iscrizione } from '$lib/models.js';
+import type { Evento, Iscrizione, Iscrizione2_duplicate, Iscrizione_expanded } from '$lib/models.js';
 import { checkAuth } from '$lib/utils.js';
-import { redirect } from '@sveltejs/kit';
+
+//TODO: error handling
 
 export const load = async ({ locals }) => {
     checkAuth(locals);
-    const iscrizioni: Iscrizione[] = await locals.pb.collection("iscrizioni").getFullList<Iscrizione>(
+    const iscrizioni: Iscrizione_expanded[] = await locals.pb.collection("iscrizioni_expanded").getFullList<Iscrizione_expanded>(
         {
-            filter: 'prenotati ?~ "' + locals.cliente.id + '"',
-            expand: 'evento,lista'
+            filter: `id_cliente = "${locals.cliente.id}"`,
+            expand: 'id_evento,id_lista'
         }
     );
 
-    // const eventi: Evento[] = iscrizioni.map((iscrizione) => iscrizione.expand.evento);
     iscrizioni.forEach(async (iscrizione) => {
-        if (iscrizione.expand && iscrizione.expand.evento) {
-            iscrizione.expand.evento.poster = await locals.pb.files.getUrl(iscrizione.expand.evento, iscrizione.expand.evento.poster);
+        if (iscrizione.expand && iscrizione.expand.id_evento) {
+            iscrizione.expand.id_evento.poster = await locals.pb.files.getUrl(iscrizione.expand.id_evento, iscrizione.expand.id_evento.poster);
         }
     });
-    // console.log(eventi);
 
     return {
         iscrizioni
@@ -27,10 +26,7 @@ export const load = async ({ locals }) => {
 export const actions = {
     unsubscribe: async ({ locals, params, request }) => {
         const body = Object.fromEntries(await request.formData()) as { [key: string]: string };
-        let id_iscrizione = body.id_iscrizione;
-        let iscrizione: Iscrizione = await locals.pb.collection("iscrizioni").getOne<Iscrizione>(id_iscrizione);
-        iscrizione.prenotati = iscrizione.prenotati.filter((id) => id !== locals.cliente.id);
-        await locals.pb.collection("iscrizioni").update(iscrizione.id, iscrizione);
+        await locals.pb.collection("iscrizioni").delete(body.id_iscrizione);
         return {
             status: 200,
             body: {
