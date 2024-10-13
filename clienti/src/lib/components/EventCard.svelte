@@ -20,6 +20,7 @@
 
     onMount(() => {
         evento.inizio = formatDate(new Date(evento.inizio));
+        evento.fine = formatDate(new Date(evento.fine));
     });
 
 </script>
@@ -33,6 +34,7 @@
     <div class="card-body">
       <h2 class="card-title">{evento.nome}</h2>
       <p><b>Start:</b><br>{evento.inizio}</p>
+      <p><b>End:</b><br>{evento.fine}</p>
       <p><b>Location:</b><br>{evento.luogo}</p>
       <div class="card-actions justify-end">
         <!-- <a href="/eventi/{evento.id}" class="btn btn-sm btn-primary btn-outline">Info</a> -->

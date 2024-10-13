@@ -61,7 +61,7 @@ export const actions = {
             });
             return {
                 status: 200, // 200 OK
-                message: "Iscrizione confermata"
+                message: "Ingresso Confermato!"
             };
         } catch (e) {
             return {

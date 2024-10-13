@@ -1,4 +1,6 @@
 <script>
+    import Input from '$lib/components/Input.svelte';
+
 	export let form;
 </script>
 
@@ -12,30 +14,32 @@
 		> se non l'hai ancora fatto.
 	</p>
 	<form action="?/login" method="POST" class="flex flex-col items-center space-y-2 w-full max-w-md pt-4">
-		<div class="form-control w-full max-w-md">
-			<label for="email" class="label font-medium pb-1">
-				<span class="label-text">Email</span>
-			</label>
-			<input type="email" name="email" class="input input-bordered w-full max-w-md" />
-		</div>
-		<div class="form-control w-full max-w-md">
-			<label for="password" class="label font-medium pb-1">
-				<span class="label-text">Password</span>
-			</label>
-			<input type="password" name="password" class="input input-bordered w-full max-w-md" />
-		</div>
+		<Input
+			label="Email"
+			id="email"
+			type="email"
+			placeholder="Inserisci la tua email"
+			value={form?.data?.email}
+			errors={form?.errors?.email}
+		/>
+		<Input
+			label="Password"
+			id="password"
+			type="password"
+			placeholder="Inserisci la tua password"
+			value={form?.data?.password}
+			errors={form?.errors?.password}
+		/>
 		<div class="w-full max-w-md">
-			<a
-				href="/reset-password"
-				class="font-medium text-primary hover:cursor-pointer hover:underline"
-			>
-				Password Dimenticata?</a
-			>
+			<a href="/reset-password" class="font-medium text-primary hover:cursor-pointer hover:underline">
+				Password Dimenticata?
+			</a>
 		</div>
 
 		<div class="w-full max-w-md pt-2">
 			<button type="submit" class="btn btn-primary w-full">Login</button>
 		</div>
+		
 		{#if form?.error}
 			<div class="alert alert-error shadow-lg w-full max-w-md">
 				<div>

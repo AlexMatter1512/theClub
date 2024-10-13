@@ -25,8 +25,8 @@
         }
 
         // Table for Prenotati (only Nome, Cognome)
-        const prenotatiHeaders = "Prenotati\nNome,Cognome\n";
-        const prenotati = lista.expand?.iscrizioni.map((p: Iscrizione_expanded) => `${p.nome_cliente},${p.cognome_cliente}`).join("\n") || "No prenotati";
+        const prenotatiHeaders = "Prenotati\nNome,Cognome,Data Iscrizione\n";
+        const prenotati = lista.expand?.iscrizioni.map((p: Iscrizione_expanded) => `${p.nome_cliente},${p.cognome_cliente},${p.data_iscrizione}`).join("\n") || "No prenotati";
 
         // Table for Entrati (Nome, Cognome, Data_ingresso)
         const entratiHeaders = "\n\nEntrati\nNome,Cognome,Data Ingresso\n";

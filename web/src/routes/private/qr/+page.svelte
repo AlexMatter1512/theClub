@@ -34,7 +34,7 @@
 {:else}
     <div class="flex flex-col items-center">
         {#if status !== 404}
-            <div class="alert alert-{alertType} max-w-md">
+            <div class="alert alert-{alertType} max-w-md text-start">
                 <div>
                     {#if status === 200}
                         <h1 class="font-bold text-2xl">Cliente Autorizzato!</h1>
@@ -42,18 +42,22 @@
                         <h1 class="font-bold text-2xl">Attenzione!</h1>
                         <p>{message}</p>
                     {/if}
+                    <br>
                     <h2 class="font-bold text-xl">Lista:</h2>
                     <p><b>Nome Lista:</b> {nome_lista}</p>
-
+                    <br>
                     <h2 class="font-bold text-xl">Evento:</h2>
                     <p><b>Nome Evento:</b> {nome_evento}</p>
                     <p><b>Start:</b> {inizio_evento}</p>
                     <p><b>End:</b> {fine_evento}</p>
-
+                    <br>
                     <h2 class="font-bold text-xl">Cliente:</h2>
                     <p><b>Nome:</b> {nome_cliente}</p>
                     <p><b>Cognome:</b> {cognome_cliente}</p>
                     <p><b>Data di iscrizione in lista:</b> {data_iscrizione}</p>
+                    {#if iscrizione?.entrato}
+                        <p><b>Data di ingresso:</b> {formatDate(new Date(iscrizione?.data_ingresso || ''))}</p>
+                    {/if}
                 </div>
             </div>
             {#if alertType !== 'error'}    
