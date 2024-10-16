@@ -1,56 +1,56 @@
-import { error, fail, redirect } from '@sveltejs/kit';
-import { generateRandomUsername, validateData } from '$lib/utils';
-import { TWILIO_SID, TWILIO_AUTH_TOKEN, TWILIO_VERIFY_SERVICE } from '$env/static/private';
-import twilio from "twilio";
+import { redirect, fail } from '@sveltejs/kit';
+import { generateRandomUsername } from '$lib/utils';
 import { registerUserSchema } from '$lib/schemas.js';
+import { superValidate, message } from 'sveltekit-superforms';
+import { zod } from 'sveltekit-superforms/adapters';
+import twilio from 'twilio';
+import { 
+	PHONE_VERIFICATION,
+	TWILIO_SID, 
+	TWILIO_AUTH_TOKEN, 
+	TWILIO_VERIFY_SERVICE,
+ } from '$env/static/private';
+
+export const load = async () => {
+	return { form: await superValidate(zod(registerUserSchema)) };
+};
 
 export const actions = {
 	register: async ({ locals, request }) => {
+		const form = await superValidate(request, zod(registerUserSchema));
+
+		if (!form.valid) {
+			return fail(400, { form });
+		}
+
+		const formData = form.data;
+		let username = generateRandomUsername(formData.name);
+		
+		if (!formData.phone.startsWith('+39')) {
+			formData.phone = '+39' + formData.phone;
+		}
+		
 		try {
-			// const body = Object.fromEntries(await request.formData()) as { [key: string]: string };
-			const { formData, errors } = await validateData(await request.formData(), registerUserSchema);
-
-			if (errors) {
-				return fail(400,{data: formData, errors: errors.fieldErrors});
-			}
-			let username = generateRandomUsername(formData.name);
-			if (!formData.phone.startsWith('+39')) {
-				formData.phone = '+39' + formData.phone;
-			}
-
 			await locals.pb.collection('clienti').create({ username, ...formData });
-			// await locals.pb.collection('clienti').requestVerification(body.email);
-
+			await locals.pb.collection('clienti').authWithPassword(formData.email, formData.password);			
+		} catch (err) {
+			console.log('Error: ', err);
+			return message(form, 'Errore durante la registrazione', { status: 500 });
+		}
+		
+		if(PHONE_VERIFICATION === 'true') {
 			const client = twilio(TWILIO_SID, TWILIO_AUTH_TOKEN);
 			const verification = await client.verify.v2
 				.services(TWILIO_VERIFY_SERVICE)
 				.verifications.create({
-					channel: "sms",
+					channel: 'sms',
 					to: formData.phone
 				});
 
 			console.log(verification.status);
 
-			await locals.pb.collection('clienti').authWithPassword(formData.email, formData.password);
-
-		} catch (err) {
-			console.log('Error: ', err);
-			
-			//TODO: better error handling for pb and twilio errors
-			//@ts-expect-error
-			let errorList = err.originalError.data.data;
-			let errorString = '';
-			// for every object in the errorList, add the error message to the error object
-
-			for (const key in errorList) {
-				if (errorList.hasOwnProperty(key) && errorList[key].message) {
-				  errorString += key + ": " +errorList[key].message + ',\n';
-				  console.log(errorList[key].message);  // Logs only the "message" property
-				}
-			  }
-			throw error(500, errorString);
+			throw redirect(303, `/me/phone`);
 		}
-
-		throw redirect(303, '/me/phone');
+		throw redirect(303, '/');
 	}
 };

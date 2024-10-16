@@ -1,9 +1,7 @@
-<script>
-	export let value = '';
-	export let placeholder = '';
+<script lang="ts">
+	export let file: FileList | undefined;
 	export let id;
 	export let label;
-	export let type = 'text';
 	export let disabled = false;
 	export let required = false;
 	export let errors;
@@ -14,15 +12,20 @@
 		<span class="label-text">{label}</span>
 	</label>
 	<input
-		class="input input-bordered w-full max-w-lg"
-		{type}
-		{placeholder}
+		class="file-input file-input-bordered w-full max-w-lg"
+		type="file"
+        placeholder="Scegli un file"
 		{required}
 		{disabled}
 		{id}
 		name={id}
-		bind:value={value}
+		bind:files={file}
 	/>
+    {#if file && file.length > 0}
+        <button type="button" class="btn btn-secondary mt-2" on:click={() => file = undefined}>
+            Remove File
+        </button>
+    {/if}
 
 	{#if errors}
 		{#each errors as error}

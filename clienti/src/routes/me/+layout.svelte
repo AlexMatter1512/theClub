@@ -11,6 +11,6 @@
         <li><a class="{eventiActive}" href="/me/eventi">Eventi</a></li>
     </ul>
 </div>
-<div class="mx-10">
+<div>
     <slot/>
 </div>
