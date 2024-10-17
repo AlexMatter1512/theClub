@@ -4,29 +4,36 @@
   import { zodClient } from 'sveltekit-superforms/adapters';
   import { verifyPhoneSchema } from '$lib/schemas';
     import { goto } from "$app/navigation";
+    import { slide } from "svelte/transition";
   export let data;
 
   const { form, errors, constraints, message, enhance } = superForm(data.form, {
     validators: zodClient(verifyPhoneSchema)
   });
 
-  if (data.form.valid){
-    setTimeout(() => {
-      goto("/")
-    }, 2000);
+  let showMessage = false;
+  $: if ($message) {
+		showMessage = true;
+		setTimeout(() => {
+			showMessage = false;
+		}, 3000);
   }
+
+  $: console.log("dataForm: ", data.form);
 </script>
 
-{#if $message}
-  {#if data.form.valid}
-    <div class="alert alert-success">
-      {$message}    
-    </div>
-  {:else}
-    <div class="alert alert-danger">
-      {$message}
-    </div>
-  {/if}
+{#if showMessage}
+  <div transition:slide>
+    {#if data.form.valid}
+      <div class="alert alert-success">
+        <span>{$message}</span> 
+      </div>
+    {:else}
+      <div class="alert alert-error">
+        <span>{$message}</span>
+      </div>
+    {/if}
+  </div>
 {/if}
 
 <div class="hero">

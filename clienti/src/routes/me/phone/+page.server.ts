@@ -6,9 +6,9 @@ import { superValidate, message } from 'sveltekit-superforms/server';
 import { zod } from 'sveltekit-superforms/adapters';
 
 export const load = async ({locals}) => {
-    if (PHONE_VERIFICATION !== 'true' || locals.cliente.phone_verified) {
-        throw redirect(303, '/');
-    }
+    // if (PHONE_VERIFICATION !== 'true' || locals.cliente.phone_verified) {
+    //     throw redirect(303, '/');
+    // }
 
     return {
         form: await superValidate(zod(verifyPhoneSchema))
@@ -18,6 +18,7 @@ export const load = async ({locals}) => {
 export const actions = {
     verify: async ({ locals, request }) => {
         const form = await superValidate(request, zod(verifyPhoneSchema));
+        console.log("form: ", form);
 
         if (!form.valid) {
             return fail(400, { form });

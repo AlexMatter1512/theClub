@@ -6,6 +6,7 @@
 	import { zodClient } from "sveltekit-superforms/adapters";
 	import { updateProfileSchema } from "$lib/schemas";
     import { slide } from "svelte/transition";
+    import { onMount } from "svelte";
 	export let data;
 
 	const { form, errors, constraints, message, enhance } = superForm(
@@ -16,6 +17,9 @@
 		},
 	);
 
+	let originalForm = JSON.stringify($form);
+	$: disabled = JSON.stringify($form) === originalForm ? "btn-disabled" : "";
+
 	// Add fileProxy to handle the avatar file input
 	const file = fileProxy(form, "avatar");
 
@@ -23,15 +27,15 @@
     // Reactive statement to automatically hide the message after a delay
 	$: if ($message && data.form.valid) {
 		showMessage = true;
+		originalForm = JSON.stringify(data.form.data);
 		setTimeout(() => {
 			showMessage = false;
 		}, 3000); // Adjust the time (3000ms = 3 seconds) as needed
+		console.log("Message shown");
 	}
 </script>
 
 <!-- <SuperDebug data={form} /> -->
-
-
 	{#if showMessage}
 		<div transition:slide class="alert alert-success shadow-lg w-full max-w-md">
 			<span>{$message}</span>
@@ -82,7 +86,7 @@
 		/>
 
 		<div class="w-full pt-4">
-			<button type="submit" class="btn btn-primary w-full">
+			<button type="submit" class="btn btn-primary w-full {disabled}">
 				Salva
 			</button>
 		</div>
