@@ -7,30 +7,35 @@
     let liste = data.liste;
 </script>
 
-<!-- EVENTI -->
+<!-- HERO -->
 <div class="hero">
     <div class="hero-content text-center">
       <div class="max-w-md">
-        <h1 class="text-5xl font-bold">Prossimi 
-          <a class="text-primary" href="/private/owner/eventi">Eventi</a>
-        </h1>
+        <h1 class="text-5xl font-bold">Dashboard</h1>
       </div>
     </div>
+</div>
+
+<!-- EVENTI -->
+<div class="mt-10 mb-5 text-center">
+  <h1 class="text-4xl font-bold">
+    Prossimi <a class="text-primary" href="/private/owner/eventi">Eventi</a>
+  </h1>
 </div>
 
 <div class="carousel carousel-center bg-base-300 space-x-4 -mx-4 p-4 w-screen">
 
   {#each eventi as evento}
-    <div class="carousel-item">
-      <EventCard backgroud={"base-100"} evento={evento} edit={data.user.owner} />
+    <div class="carousel-item max-w-sm md:max-w-full">
+      <EventCard evento={evento} edit={data.user.owner} />
     </div>
   {/each}
 </div>
 
 <!-- LISTE -->
-<div class="mt-10 text-center">
-  <h1 class="text-5xl font-bold">
-    <a class="text-primary" href="/private/owner/liste">Liste</a>
+<div class="mt-10 mb-5 text-center">
+  <h1 class="text-4xl font-bold">
+  Ultime <a class="text-primary" href="/private/owner/liste">Liste</a>
   </h1>
 </div>
 

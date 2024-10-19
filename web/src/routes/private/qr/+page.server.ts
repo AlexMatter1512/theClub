@@ -1,4 +1,4 @@
-import type { Iscrizione_expanded } from '$lib/models.js';
+import type { Iscrizione_expanded } from '../../../../../common/script/models';
 
 export const load = async ({ locals, url }) => {
     const { pb } = locals;

@@ -35,7 +35,7 @@
 	}
 </script>
 
-<!-- <SuperDebug data={form} /> -->
+<SuperDebug data={form} />
 	{#if showMessage}
 		<div transition:slide class="alert alert-success shadow-lg w-full max-w-md">
 			<span>{$message}</span>

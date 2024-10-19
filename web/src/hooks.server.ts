@@ -12,7 +12,7 @@ export async function handle({ event, resolve }) {
     } else {
         event.locals.user = undefined;
     }
-    console.log("hooks: user: ",event.locals.user);
+    // console.log("hooks: user: ",event.locals.user);
 
     try {
         // get an up-to-date auth store state by verifying and refreshing the loaded auth model (if any)

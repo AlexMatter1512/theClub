@@ -27,7 +27,10 @@
 					<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 					<ul tabindex="0" class="dropdown-content menu bg-base-300 rounded-box z-[1] w-52 p-2 shadow">
 						<li>
-							<a href="/me/eventi">Profilo</a>
+							<a href="/me/profile">Profilo</a>
+						</li>
+						<li>
+							<a href="/me/eventi">I miei eventi</a>
 						</li>
 						<li>
 							<button class="btn btn-sm btn-outline btn-error justify-normal" on:click={() => {fetch('/logout', {method: 'POST'}).then((response) => window.location.href = response.url)}}>Logout</button>

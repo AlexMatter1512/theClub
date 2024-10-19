@@ -33,6 +33,8 @@
                 {/each}
             </div>
         </div>
+    {:else}
+        <h1 class="text-2xl font-bold mb-4 text-center">Non hai eventi in programma</h1>
     {/if}
     
     {#if iscrizioni_passate.length}    

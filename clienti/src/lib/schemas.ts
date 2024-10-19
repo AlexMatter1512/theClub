@@ -17,9 +17,9 @@ const calculateAge = (birthDate: Date) => {
 const avatarSchema = z
   .any()
   .refine((file) => file instanceof File, { message: 'Devi caricare un file valido' })
-  .refine((file) => file.size <= 5 * 1024 * 1024, { message: 'Il file deve essere minore di 5MB' })
+  .refine((file) => file?.size <= 5 * 1024 * 1024, { message: 'Il file deve essere minore di 5MB' })
   .refine(
-    (file) => ['image/jpeg', 'image/png', 'image/gif'].includes(file.type),
+    (file) => ['image/jpeg', 'image/png', 'image/gif'].includes(file?.type),
     { message: 'Tipo di file non valido. Sono permessi solo JPEG, PNG e GIF' }
   );
 

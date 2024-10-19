@@ -5,6 +5,7 @@
   import { verifyPhoneSchema } from '$lib/schemas';
     import { goto } from "$app/navigation";
     import { slide } from "svelte/transition";
+    import { page } from "$app/stores";
   export let data;
 
   const { form, errors, constraints, message, enhance } = superForm(data.form, {
@@ -16,6 +17,7 @@
 		showMessage = true;
 		setTimeout(() => {
 			showMessage = false;
+      goto("/")
 		}, 3000);
   }
 
@@ -24,7 +26,7 @@
 
 {#if showMessage}
   <div transition:slide>
-    {#if data.form.valid}
+    {#if $page.status === 200}
       <div class="alert alert-success">
         <span>{$message}</span> 
       </div>

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { User } from "$lib/models";
+    import type { User } from "../../../../common/script/models";
     import { onMount } from "svelte";
 
     export let user: User = {

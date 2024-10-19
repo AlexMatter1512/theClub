@@ -1,4 +1,4 @@
-import type { User } from '$lib/models.js';
+import type { User } from '../../../../../../common/script/models';
 
 export const load = async ({locals}) => {
     // get all the users that are not verified from locals.pb.collection('users')
