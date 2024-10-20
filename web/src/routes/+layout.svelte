@@ -25,7 +25,7 @@
 					<div>
 						<a href="/private/owner/eventi" class="btn btn-outline btn-sm">Eventi</a>
 						<a href="/private/owner/liste" class="btn btn-outline btn-sm">Liste</a>
-						<a href="/private/owner/pr" class="btn btn-outline btn-sm">PR</a>
+						<a href="/private/owner/pr" class="btn btn-outline btn-sm">Staff</a>
 					</div>
 				{:else}
 					<div class="dropdown dropdown-end dropdown-hover">
@@ -39,7 +39,7 @@
 								<a href="/private/owner/liste">Liste</a>
 							</li>
 							<li>
-								<a href="/private/owner/pr">PR</a>
+								<a href="/private/owner/pr">Staff</a>
 							</li>
 						</ul>
 					</div>

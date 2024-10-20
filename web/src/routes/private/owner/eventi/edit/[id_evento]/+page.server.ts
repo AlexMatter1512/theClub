@@ -1,4 +1,4 @@
-import type { Iscrizione_expanded, Evento } from '../../../../../../../../common/script/models';
+import type { Iscrizione_expanded,  Evento, Lista, Lista_evento } from '$lib/models';
 import { eventSchema } from '$lib/schemas';
 import { correctDateString } from '$lib/utils.js';
 import { message, superValidate } from 'sveltekit-superforms';
@@ -9,7 +9,7 @@ export const load = async ({ locals, params }) => {
     evento.poster = await locals.pb.getFileUrl(evento, evento.poster)
     
     // im not expanding evento (and im doing the query above) because it would send the same data for each lista
-    let listeEvento = await locals.pb.collection("liste_eventi").getFullList(
+    let listeEvento = await locals.pb.collection("liste_eventi").getFullList<Lista_evento>(
         {
             filter: 'evento = "' + params.id_evento + '"',
             expand: 'lista'

@@ -26,3 +26,18 @@ export const eventSchema = z.object({
 
     poster: posterSchema,
 });
+
+export const listaSchema = z.object({
+    nome:
+        z.string({ required_error: 'Nome necessario' })
+            .min(2, { message: 'Il nome deve essere di almeno 2 caratteri' })
+            .max(128, { message: 'Il nome può essere lungo al massimo 128 caratteri' }),
+    descrizione: 
+        z.string()
+        .max(128, { message: 'La descrizione può essere lunga al massimo 128 caratteri' })
+        .optional(),
+    nome_pr:
+        z.string({ required_error: 'Nome del proprietario necessario' })
+            .min(2, { message: 'Il nome del proprietario deve essere di almeno 2 caratteri' })
+            .max(128, { message: 'Il nome del proprietario può essere lungo al massimo 128 caratteri' }),
+});

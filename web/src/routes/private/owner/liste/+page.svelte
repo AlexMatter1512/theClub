@@ -9,7 +9,7 @@
     (lista) =>
       lista.nome.toLowerCase().includes(searchQuery.toLowerCase()) ||
       lista.nome_pr.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      lista.description?.toLowerCase().includes(searchQuery.toLowerCase()),
+      lista.descrizione?.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 </script>
 

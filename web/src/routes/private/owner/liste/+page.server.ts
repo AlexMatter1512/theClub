@@ -1,4 +1,4 @@
-import type { Lista } from '../../../../../../common/script/models';
+import type { Lista } from '$lib/models';
 
 export const load = async ({locals}) => {
     // you can also fetch all records at once via getFullList

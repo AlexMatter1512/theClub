@@ -1,8 +1,10 @@
 <script lang="ts">
+    import { page } from "$app/stores";
     import type { Evento, Iscrizione_expanded } from "../../../../common/script/models";
     import Input from "./Input.svelte";
     export let listeEvento: any[];
     export let evento: Evento;
+    export let open: boolean = false;
 
 
     function downloadCSV(id_listaEvento: string) {
@@ -62,9 +64,13 @@
 <div class="w-full max-w-md mt-8">
     <div class="flex justify-between items-center">
         <h2 class="text-3xl font-bold mb-4">Liste Evento</h2>
-        <a href="/private/owner/liste" class="btn btn-circle btn-primary">
-            +
-        </a>
+        <button class="btn btn-circle btn-primary" on:click={() => (open = !open)}>
+            {#if open}
+                ✕
+            {:else}
+                +
+            {/if}
+        </button>
     </div>
 
     {#each listeEvento as listaEvento}

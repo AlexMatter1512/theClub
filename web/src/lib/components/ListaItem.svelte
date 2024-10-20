@@ -16,5 +16,5 @@
     <p class="text-md mt-4">{lista.description}</p>
 
     <!-- Edit button positioned in the bottom-right corner -->
-    <a href="./liste/info/{lista.id}" class="btn btn-primary btn-sm absolute bottom-4 right-4"> Info </a>
+    <a href="./liste/edit/{lista.id}" class="btn btn-primary btn-sm absolute bottom-4 right-4"> Info </a>
 </div>

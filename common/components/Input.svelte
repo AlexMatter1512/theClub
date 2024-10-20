@@ -6,7 +6,7 @@
 	export let type = 'text';
 	export let disabled = false;
 	export let required = false;
-	export let errors;
+	export let errors: string[] | undefined = undefined;
 	export let constraints: any | undefined = undefined;
 </script>
 

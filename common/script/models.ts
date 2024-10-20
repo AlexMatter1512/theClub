@@ -60,10 +60,24 @@ export interface Cliente {
 export interface Lista {
     id: string;
     nome: string;
-    description: string;
+    descrizione: string;
     nome_pr: string;
     created: string;
     updated: string;
+    expand: any | undefined;
+}
+
+export interface Lista_evento {
+    id: string;
+    lista: string;
+    evento: string;
+    apertura: string | null | undefined;
+    chiusura: string | null | undefined;
+    prenotati: number;
+    entrati: number;
+    created: string;
+    updated: string;
+    expand: any | undefined;
 }
 
 export interface Iscrizione {

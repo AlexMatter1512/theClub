@@ -1,4 +1,4 @@
-import type { Evento } from '../../../../../common/script/models';
+import type { Lista, Evento } from '$lib/models';
 import { formatDate } from '../../../../../common/script/utils';
 
 export const load = async ({locals}) => {
@@ -8,9 +8,9 @@ export const load = async ({locals}) => {
         sort: 'inizio',
     });
 
-    console.log(eventi);
-
-    let liste = await locals.pb.collection("liste").getFullList();
+    let liste = await locals.pb.collection("liste").getList<Lista>(1, 5, {
+        sort: '-created',
+    });
 
     for (let evento of eventi.items) {
         // console.log(evento);
@@ -20,6 +20,6 @@ export const load = async ({locals}) => {
     }
     return {
         eventi: eventi.items,
-        liste
+        liste: liste.items,
     };
 };

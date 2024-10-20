@@ -11,6 +11,7 @@
     import { zodClient } from "sveltekit-superforms/adapters";
     import { eventSchema } from "$lib/schemas.js";
     import { goto } from "$app/navigation";
+    import { DangerDelete, ListChooser } from "$lib/components";
 
     export let data;
     const { evento, listeEvento, iscrizioni_expanded } = data;
@@ -22,7 +23,7 @@
             onUpdated: init_page
         },
     );
-    // evento.inizio = getDateString(evento.inizio);
+    let openChooser = false;
     let originalForm = JSON.stringify($form);
     let originalPoster = { 
         name: $form.poster?.name,
@@ -98,8 +99,8 @@
     </div>
 </div>
 
-<div class="flex flex-col items-center lg:flex-row justify-around">
-    <div class="flex flex-col gap-1 w-full">
+<div class="flex flex-col lg:flex-row justify-around">
+    <div class="flex flex-col gap-1 w-full max-w-md">
         <form enctype="multipart/form-data" action="?/edit" class="w-full max-w-md" method="POST" use:enhance>
             <PosterInput
                 src={evento.poster}
@@ -146,21 +147,17 @@
                 <button class="btn btn-primary" type="submit" disabled={!enableButton}>Salva</button>
             </div>
         </form>
-        <div class="collapse text-black w-full max-w-md rounded-lg">
-            <input type="checkbox" class="peer" />
-            <div class="collapse-title px-4 text-center bg-error peer-checked:bg-warning">
-              <b>Elimina Evento</b>
-            </div>
-            <div class="collapse-content bg-error peer-checked:bg-warning">
-                <button class="btn btn-error w-full" on:click={delete_evento}>
-                    ⚠️ Conferma ⚠️
-                </button>
-                <p><b>ATTENZIONE:</b> Questa azione è irreversibile. <br></p>
-                <p class="text-xs text-gray-400">Mbare, io ti ho avvertito!</p>
-                
-            </div>
-          </div>
+        <DangerDelete delete_function={delete_evento} item_name="evento" />
     </div>
 
-    <ListeEvento {listeEvento} {evento} />
+    {#if openChooser}
+        <div class="fixed inset-0 bg-black bg-opacity-50 z-50">
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 w-full rounded-lg">
+                <ListChooser bind:openChooser={openChooser} selectedLists={listeEvento.map((lista) => lista.expand.lista)}/>
+            
+            </div>
+        </div>
+    {/if}
+
+    <ListeEvento {listeEvento} {evento} bind:open = {openChooser} />
 </div>
