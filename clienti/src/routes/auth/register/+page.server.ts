@@ -4,12 +4,13 @@ import { registerUserSchema } from '$lib/schemas.js';
 import { superValidate, message } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import twilio from 'twilio';
-import { 
+import { env } from '$env/dynamic/private';
+const { 
 	PHONE_VERIFICATION,
 	TWILIO_SID, 
 	TWILIO_AUTH_TOKEN, 
 	TWILIO_VERIFY_SERVICE,
- } from '$env/static/private';
+ } = env;
 
 export const load = async () => {
 	return { form: await superValidate(zod(registerUserSchema)) };

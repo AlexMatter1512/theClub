@@ -1,5 +1,6 @@
 import twilio from 'twilio';
-import { TWILIO_SID, TWILIO_AUTH_TOKEN, TWILIO_VERIFY_SERVICE, PHONE_VERIFICATION } from '$env/static/private';
+import { env } from '$env/dynamic/private';
+const { TWILIO_SID, TWILIO_AUTH_TOKEN, TWILIO_VERIFY_SERVICE, PHONE_VERIFICATION } = env;
 import { verifyPhoneSchema } from '$lib/schemas';
 import { fail, redirect } from '@sveltejs/kit';
 import { superValidate, message } from 'sveltekit-superforms/server';
