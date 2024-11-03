@@ -16,6 +16,8 @@ services:
       dockerfile: Dockerfile_web
     ports:
       - "127.0.0.1:3000:3000"
+    volumes:
+      - ./.env:/app/.env
     environment:
       - NODE_ENV=production
       - ORIGIN=https://admin.guestin.org
@@ -28,6 +30,8 @@ services:
       dockerfile: Dockerfile_clienti
     ports:
       - "127.0.0.1:3001:3000"
+    volumes:
+      - ./.env:/app/.env
     environment:
       - NODE_ENV=production
       - ORIGIN=https://users.guestin.org
