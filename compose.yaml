@@ -18,7 +18,7 @@ services:
       - "127.0.0.1:3000:3000"
     environment:
       - NODE_ENV=production
-      - ORIGIN=http://guestin.org:3000
+      - ORIGIN=https://admin.guestin.org
       - POCKETBASE_URL=http://guestin.org:8090
 
   clienti:
@@ -30,5 +30,5 @@ services:
       - "127.0.0.1:3001:3000"
     environment:
       - NODE_ENV=production
-      - ORIGIN=http://guestin.org:3001
+      - ORIGIN=https://users.guestin.org
       - POCKETBASE_URL=http://guestin.org:8090
