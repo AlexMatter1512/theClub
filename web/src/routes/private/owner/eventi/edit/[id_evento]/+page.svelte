@@ -10,8 +10,11 @@
     import PosterInput from "$lib/components/PosterInput.svelte";
     import { zodClient } from "sveltekit-superforms/adapters";
     import { eventSchema } from "$lib/schemas.js";
-    import { goto } from "$app/navigation";
+    import { goto, invalidate } from "$app/navigation";
     import { DangerDelete, ListChooser } from "$lib/components";
+    import type { Lista } from "$lib/models.js";
+    import { redirect } from "@sveltejs/kit";
+    import { page } from "$app/stores";
 
     export let data;
     const { evento, listeEvento, iscrizioni_expanded } = data;
@@ -24,6 +27,7 @@
         },
     );
     let openChooser = false;
+    let selectedLists: Lista[] = [];
     let originalForm = JSON.stringify($form);
     let originalPoster = { 
         name: $form.poster?.name,
@@ -72,6 +76,47 @@
         }
     }
 
+    async function addListe() {
+        let toAdd = selectedLists.map(list => list.id);
+        await fetch(`/private/owner/eventi/edit/${evento.id}/lists`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ liste: toAdd }),
+        })
+        .then((res) => res.json())
+        .then((res) => {
+            if (res.status === "success") {
+                window.location.reload();
+            }
+            else {
+                console.log(res);
+            }
+        });
+    }
+
+    async function delete_lista(event: CustomEvent) {
+        let id_lista_evento = event.detail;
+        console.log("Deleting lista", id_lista_evento);
+        await fetch(`/private/owner/eventi/edit/${evento.id}/lists`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id_lista_evento }),
+        })
+        .then((res) => res.json())
+        .then((res) => {
+            if (res.status === "success") {
+                window.location.reload();
+            }
+            else {
+                console.log(res);
+            }
+        });
+    }
+
     async function delete_evento() {
         await fetch(`/private/owner/eventi/edit/${evento.id}`, {
             method: "DELETE",
@@ -87,6 +132,8 @@
     onMount(async () => {
         await init_page();
     });
+
+    $: console.log(selectedLists)
 </script>
 
 <!-- <SuperDebug data={form} /> -->
@@ -153,11 +200,10 @@
     {#if openChooser}
         <div class="fixed inset-0 bg-black bg-opacity-50 z-50">
             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 w-full rounded-lg">
-                <ListChooser bind:openChooser={openChooser} selectedLists={listeEvento.map((lista) => lista.expand.lista)}/>
-            
+                <ListChooser eventoId={evento.id} bind:openChooser={openChooser} bind:selectedLists={selectedLists} on:save={addListe} />
             </div>
         </div>
     {/if}
 
-    <ListeEvento {listeEvento} {evento} bind:open = {openChooser} />
+    <ListeEvento {listeEvento} {evento} bind:open = {openChooser} on:delete_lista={delete_lista} />
 </div>

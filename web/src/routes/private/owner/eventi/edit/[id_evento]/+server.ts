@@ -10,3 +10,4 @@ export const DELETE = async ({ locals, params }) => {
     }
     return json({status:"success", text:"Evento eliminato con successo"});
 }
+

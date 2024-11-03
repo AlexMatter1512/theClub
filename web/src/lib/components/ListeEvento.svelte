@@ -1,11 +1,14 @@
 <script lang="ts">
     import { page } from "$app/stores";
+    import { createEventDispatcher } from "svelte";
     import type { Evento, Iscrizione_expanded } from "../../../../common/script/models";
+    import DangerDelete from "./DangerDelete.svelte";
     import Input from "./Input.svelte";
     export let listeEvento: any[];
     export let evento: Evento;
     export let open: boolean = false;
 
+    let dispatch = createEventDispatcher();
 
     function downloadCSV(id_listaEvento: string) {
         console.log("Downloading CSV for iscrizione", id_listaEvento);
@@ -134,7 +137,7 @@
                         id="chiusura"
                         errors=""
                     />
-                    <div class="flex justify-center gap-1 w-full mt-4">
+                    <div class="flex justify-center gap-1 w-full my-4">
                         <button
                             class="btn btn-sm flex-grow btn-outline btn-secondary mt-2"
                             >Chiudi Ora</button
@@ -144,6 +147,11 @@
                             >Salva</button
                         >
                     </div>
+                    <DangerDelete
+                        delete_function={() => {dispatch("delete_lista", listaEvento.id)}}
+                        item_name="lista"
+                        additional_text="Eliminando la lista verranno eliminati anche tutti i dati relativi alle iscrizioni e agli ingressi."
+                    />
                 </div>
             </div>
         </div>

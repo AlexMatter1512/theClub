@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import type { Evento } from "../../../../common/script/models";
+    import { formatDate } from "$lib/utils";
 
   export let edit = false;
   export let evento: Evento = {
@@ -16,6 +16,9 @@
     formatted_inizio: "Event Date",
     formatted_fine: "Event end Date",
   };
+
+  $: evento.formatted_inizio = formatDate(new Date(evento.inizio));
+  $: evento.formatted_fine = formatDate(new Date(evento.fine));
 </script>
 
 <div

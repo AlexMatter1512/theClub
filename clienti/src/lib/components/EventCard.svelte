@@ -14,14 +14,14 @@
         poster: "https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp",
         created: "Created Date",
         updated: "Updated Date",
+        formatted_inizio: "event inizio",
+        formatted_fine: "event fine"
     }
 
-    export let base = 100;
+    $: evento.formatted_inizio = formatDate(new Date(evento.inizio))
+    $: evento.formatted_fine = formatDate(new Date(evento.fine))
 
-    onMount(() => {
-        evento.inizio = formatDate(new Date(evento.inizio));
-        evento.fine = formatDate(new Date(evento.fine));
-    });
+    export let base = 100;
 
 </script>
 
@@ -33,8 +33,8 @@
     </figure>
     <div class="card-body">
       <h2 class="card-title">{evento.nome}</h2>
-      <p><b>Start:</b><br>{evento.inizio}</p>
-      <p><b>End:</b><br>{evento.fine}</p>
+      <p><b>Start:</b><br>{evento.formatted_inizio}</p>
+      <p><b>End:</b><br>{evento.formatted_fine}</p>
       <p><b>Location:</b><br>{evento.luogo}</p>
       <div class="card-actions justify-end">
         <!-- <a href="/eventi/{evento.id}" class="btn btn-sm btn-primary btn-outline">Info</a> -->

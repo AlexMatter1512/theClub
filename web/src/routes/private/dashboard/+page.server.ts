@@ -15,8 +15,6 @@ export const load = async ({locals}) => {
     for (let evento of eventi.items) {
         // console.log(evento);
         evento.poster = await locals.pb.getFileUrl(evento, evento.poster);
-        evento.formatted_inizio = formatDate(new Date(evento.inizio));
-        evento.formatted_fine = formatDate(new Date(evento.fine));
     }
     return {
         eventi: eventi.items,
