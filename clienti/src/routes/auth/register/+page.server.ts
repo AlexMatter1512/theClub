@@ -5,12 +5,6 @@ import { superValidate, message } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import twilio from 'twilio';
 import { env } from '$env/dynamic/private';
-const { 
-	PHONE_VERIFICATION,
-	TWILIO_SID, 
-	TWILIO_AUTH_TOKEN, 
-	TWILIO_VERIFY_SERVICE,
- } = env;
 
 export const load = async () => {
 	return { form: await superValidate(zod(registerUserSchema)) };
@@ -18,6 +12,16 @@ export const load = async () => {
 
 export const actions = {
 	register: async ({ locals, request }) => {
+		const { 
+			PHONE_VERIFICATION,
+			TWILIO_SID, 
+			TWILIO_AUTH_TOKEN, 
+			TWILIO_VERIFY_SERVICE,
+		} = env;
+		console.log('PHONE_VERIFICATION:', PHONE_VERIFICATION);
+		console.log('TWILIO_SID:', TWILIO_SID);
+		console.log('TWILIO_AUTH_TOKEN:', TWILIO_AUTH_TOKEN);
+		console.log('TWILIO_VERIFY_SERVICE:', TWILIO_VERIFY_SERVICE);
 		const form = await superValidate(request, zod(registerUserSchema));
 
 		if (!form.valid) {
