@@ -15,7 +15,7 @@ services:
       context: .
       dockerfile: Dockerfile_web
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
     environment:
       - NODE_ENV=production
       - ORIGIN=http://guestin.org:3000
@@ -27,7 +27,7 @@ services:
       context: .
       dockerfile: Dockerfile_clienti
     ports:
-      - "3001:3000"
+      - "127.0.0.1:3001:3000"
     environment:
       - NODE_ENV=production
       - ORIGIN=http://guestin.org:3001
