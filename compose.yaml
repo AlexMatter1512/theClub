@@ -1,5 +1,6 @@
 services:
   backend:
+    image: alexmatter/theclub:backend
     build:
       context: .
       dockerfile: Dockerfile_backend
@@ -9,6 +10,7 @@ services:
       - ./backend/pb_data:/pb/pb_data
 
   web:
+    image: alexmatter/theclub:web
     build:
       context: .
       dockerfile: Dockerfile_web
@@ -20,6 +22,7 @@ services:
       - POCKETBASE_URL=http://guestin.org:8090
 
   clienti:
+    image: alexmatter/theclub:clienti
     build:
       context: .
       dockerfile: Dockerfile_clienti
