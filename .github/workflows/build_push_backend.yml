@@ -1,4 +1,4 @@
-name: Build and Push Docker Images
+name: Build and Push Backend image
 
 on:
   workflow_dispatch:
@@ -21,6 +21,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: Dockerfile_web
+          file: Dockerfile_backend
           push: true
-          tags: alexmatter/theclub:web
+          tags: alexmatter/theclub:backend
