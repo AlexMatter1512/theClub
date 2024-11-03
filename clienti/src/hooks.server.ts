@@ -1,9 +1,10 @@
 // src/hooks.server.js
 import PocketBase from 'pocketbase';
+import { env } from "$env/dynamic/private";
 
 /** @type {import('@sveltejs/kit').Handle} */
 export async function handle({ event, resolve }) {
-    event.locals.pb = new PocketBase('http://mbp14alex.local:8090');
+    event.locals.pb = new PocketBase(env.POCKETBASE_URL);
 
     // load the store data from the request cookie string
     event.locals.pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '');

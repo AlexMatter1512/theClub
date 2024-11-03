@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile_backend
     ports:
-      - "8090:8090"
+      - "127.0.0.1:8090:8090"
     volumes:
       - ./backend/pb_data:/pb/pb_data
 
@@ -19,7 +19,7 @@ services:
     environment:
       - NODE_ENV=production
       - ORIGIN=https://admin.guestin.org
-      - POCKETBASE_URL=http://guestin.org:8090
+      - POCKETBASE_URL=https://backend.guestin.org
 
   clienti:
     image: alexmatter/theclub:clienti
@@ -31,4 +31,4 @@ services:
     environment:
       - NODE_ENV=production
       - ORIGIN=https://users.guestin.org
-      - POCKETBASE_URL=http://guestin.org:8090
+      - POCKETBASE_URL=https://backend.guestin.org
