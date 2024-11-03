@@ -1,0 +1,22 @@
+FROM oven/bun AS build
+
+WORKDIR /app
+
+COPY ./common ./common
+COPY ./clienti ./clienti
+
+WORKDIR /app/clienti
+RUN bun install
+RUN bun run build
+RUN ls
+FROM node:18 AS run
+
+ENV NODE_ENV=production
+
+WORKDIR /app/clienti
+RUN ls
+COPY --from=build /app/clienti/build ./build
+COPY --from=build /app/clienti/package.json ./package.json
+COPY --from=build /app/clienti/node_modules ./node_modules
+RUN ulimit -c unlimited
+ENTRYPOINT ["node", "build"]
