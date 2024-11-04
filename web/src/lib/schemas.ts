@@ -4,7 +4,7 @@ import { z } from 'zod';
 const posterSchema = z
   .any()
   .refine((file) => file instanceof File, { message: 'File obbligatorio' })
-  .refine((file) => file?.size <= 5 * 1024 * 1024, { message: 'Il file deve essere minore di 5MB' })
+  .refine((file) => file?.size <= 2 * 1024 * 1024, { message: 'Il file deve essere minore di 2MB' })
   .refine(
     (file) => ['image/jpeg', 'image/png', 'image/gif'].includes(file?.type),
     { message: 'Sono permessi solo JPEG, PNG e GIF' }
