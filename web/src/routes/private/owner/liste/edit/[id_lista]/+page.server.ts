@@ -16,7 +16,7 @@ export const load = async ({ locals, params }) => {
 export const actions = {
     edit: async ({ locals, params, request }) => {
         const form = await superValidate(request, zod(listaSchema));
-        if (env.SERVER_DEBUG) console.log("form.data: ", form.data);
+        if (env.SERVER_DEBUG === "true") console.log("form.data: ", form.data);
         if (!form.valid) {
             return message(form, {status:"fail", text:"Errore durante la validazione della lista"});
         }

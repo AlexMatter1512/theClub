@@ -38,10 +38,11 @@ export const load = async ({ locals, params }) => {
 
 export const actions = {
     edit: async ({ locals, request, params }) => {
+        let formData = await request.formData();
         if (env.SERVER_DEBUG === "true") {
-            console.log("request: ", JSON.stringify(request, null, 2));
+            console.log("request formData: ", formData);
         }
-        const form = await superValidate(request, zod(eventSchema));
+        const form = await superValidate(formData, zod(eventSchema));
         if (env.SERVER_DEBUG === "true") console.log("form.data: ", form.data);
         let updateObj = {
             ...form.data, // Spread the entire form.data object
@@ -53,8 +54,8 @@ export const actions = {
             await locals.pb.collection("eventi").update(params.id_evento, updateObj);
         } catch (e) {
             console.error(e);
-            return message(form, 'Errore durante la modifica dell\'evento');
+            return message(form, {status:"fail", text:"Errore durante la modifica dell'evento"});
         }
-        return message(form, 'Evento modificato con successo');
+        return message(form, {status:"success", text:"Evento modificato con successo"});
     }
 };
