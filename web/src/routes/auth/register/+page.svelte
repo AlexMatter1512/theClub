@@ -4,6 +4,7 @@
     import { slide } from "svelte/transition";
     import SuperDebug, { superForm } from "sveltekit-superforms";
     import { zodClient } from "sveltekit-superforms/adapters";
+	import { env } from "$env/dynamic/public";
 
     export let data;
 
@@ -45,8 +46,9 @@
     </div>
 {/if}
 
-<!-- Debugging Component (Optional) -->
-<!-- <SuperDebug data={$form}/> -->
+{#if env.PUBLIC_DEBUG === "true"}
+	<SuperDebug data={$form} />
+{/if}
 
 <!-- Registration Form -->
 <div class="flex flex-col items-center h-full w-full px-10">

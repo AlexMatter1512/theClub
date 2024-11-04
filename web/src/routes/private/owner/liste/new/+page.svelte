@@ -4,6 +4,7 @@
     import { zodClient } from 'sveltekit-superforms/adapters';
     import { Input } from '$lib/components/index.js';
     import { goto } from '$app/navigation';
+    import { env } from '$env/dynamic/public';
     import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
 
     export let data;
@@ -31,7 +32,9 @@
     }
 </script>
 
-<!-- <SuperDebug data={form} /> -->
+{#if env.PUBLIC_DEBUG === "true"}
+    <SuperDebug data={form} />
+{/if}
 
 <div class="hero relative">
     <div class="hero-content text-center">

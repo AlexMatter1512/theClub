@@ -14,6 +14,7 @@
     import { eventSchema } from "$lib/schemas.js";
     import { slide } from "svelte/transition";
     import { goto } from "$app/navigation";
+    import { env } from "$env/dynamic/public";
 
     export let data;
 
@@ -33,7 +34,9 @@
     }
 </script>
 
-<!-- <SuperDebug data={$form} /> -->
+{#if env.PUBLIC_DEBUG === "true"}
+     <SuperDebug data={$form} />
+{/if}
 
 <div class="hero">
     <div class="hero-content text-center">

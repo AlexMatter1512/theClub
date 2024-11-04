@@ -6,6 +6,7 @@
   import { goto } from '$app/navigation';
   import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
   import { slide } from 'svelte/transition';
+  import { env } from '$env/dynamic/public';
 
   export let data;
   const lista = data.lista;
@@ -48,7 +49,9 @@
   }
 </script>
 
-<!-- <SuperDebug data={form} /> -->
+{#if env.PUBLIC_DEBUG === "true"}
+    <SuperDebug data={$form} />
+{/if}
 <div class="hero">
     <div class="hero-content text-center">
       <div class="max-w-md">

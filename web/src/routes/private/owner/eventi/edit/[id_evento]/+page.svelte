@@ -15,6 +15,7 @@
     import type { Lista } from "$lib/models.js";
     import { redirect } from "@sveltejs/kit";
     import { page } from "$app/stores";
+    import { env } from "$env/dynamic/public";
 
     export let data;
     const { evento, listeEvento, iscrizioni_expanded } = data;
@@ -136,7 +137,9 @@
     $: console.log(selectedLists)
 </script>
 
-<!-- <SuperDebug data={form} /> -->
+{#if env.PUBLIC_DEBUG === "true"}    
+    <SuperDebug data={form} />
+{/if}
 
 <div class="hero">
     <div class="hero-content text-center">
