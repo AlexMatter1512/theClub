@@ -19,38 +19,20 @@
             preview.src = src;
         }
     };
-
-    // onMount(async () => {
-    //     if (src) {
-    //         const response = await fetch(src);
-    //         const blob = await response.blob();
-    //         const fileName = src.split('/').pop() || 'file';
-    //         const fileObject = new File([blob], fileName, { type: blob.type });
-
-    //         // Creating a DataTransfer object to simulate a FileList
-    //         const dataTransfer = new DataTransfer();
-    //         dataTransfer.items.add(fileObject);
-
-    //         // Assign the created FileList to `file`
-    //         file = dataTransfer.files;
-    //     }
-    // });
 </script>
 
 <label for="image" class="label font-medium pb-1">
     <span class="label-text">Poster</span>
 </label>
-<label for={name} class="relative hover:cursor-pointer block max-w-xs w-full">
-    <!-- Rectangular image for preview with max width capped to `sm` -->
-    <!-- svelte-ignore a11y_img_redundant_alt -->
-    <img {src} alt="image preview" id="image-preview" class="w-full object-cover rounded-lg" />
-
-    <!-- Pencil icon slightly overlapping the image -->
-    <span
-        class="absolute bottom-4 right-4 btn btn-circle btn-sm btn-secondary"
-    >
-        <Pencil class="w-4 h-4" />
-    </span>
+<label for={name} class="hover:cursor-pointer block w-full p-4">
+    <div class="flex flex-col justify-end items-end bg-cover bg-center w-full aspect-[9/13] shadow-xl rounded-xl overflow-hidden p-4" style="background-image: url({src});">
+        <!-- Pencil icon slightly overlapping the image -->
+        <span
+            class="btn btn-circle btn-sm btn-secondary"
+        >
+            <Pencil class="w-4 h-4" />
+        </span>
+    </div>
 </label>
 
 <!-- Hidden file input -->

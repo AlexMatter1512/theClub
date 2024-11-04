@@ -49,7 +49,8 @@
 
 	<footer class="footer bg-base-300 text-neutral-content items-center p-4 z-20">
 		<aside class="grid-flow-col items-center">
-		  <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
+		  <p>Copyright TheClub © {new Date().getFullYear()} - All right reserved</p>
+		<a href="/privacy-policy" class="link link-hover">Privacy Policy</a>
 		</aside>
 		<nav class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
 		  <a href="https://www.instagram.com/theclub095/" target="_blank" rel="noopener" aria-label="Instagram">

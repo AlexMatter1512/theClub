@@ -146,7 +146,7 @@
 {/if}
 
 {#if showToast}
-<div class="toast toast-top toast-center md:toast-bottom md:toast-end w-full md:max-w-md" transition:slide>
+<div class="toast z-50 toast-top toast-center md:toast-bottom md:toast-end w-full md:max-w-md" transition:slide>
     <div class="alert { $message.status === 'success' ? 'alert-success' : 'alert-error' } flex items-center justify-between">
       <div class="flex-grow text-center text-sm font-medium">{$message.text}</div>
       <button class="btn btn-sm btn-circle btn-ghost text-neutral" on:click={() => showToast = false} aria-label="Close">
@@ -159,7 +159,7 @@
 <div class="hero">
     <div class="hero-content text-center">
         <div class="max-w-md">
-            <h1 class="text-5xl font-bold">Evento {evento.nome}</h1>
+            <h1 class="text-4xl font-bold">Evento {evento.nome}</h1>
         </div>
     </div>
 </div>

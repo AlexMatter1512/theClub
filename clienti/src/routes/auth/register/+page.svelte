@@ -118,5 +118,11 @@
 	  <div class="w-full pt-4">
 		<button type="submit" class="btn btn-primary w-full">Registrati</button>
 	  </div>
+	<div class="text-center text-sm mt-4">
+		Cliccando Registrati accetti la 
+		<a href="/privacy-policy" class="text-primary font-medium hover:cursor-pointer hover:underline">
+			Privacy Policy
+		</a>.
+	</div>
 	</form>
   </div>
