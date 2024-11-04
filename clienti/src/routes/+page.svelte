@@ -4,15 +4,14 @@
     export let data;
 
     let eventi = data.eventi;
+    let checkboxs_checked = false;
 </script>
 
 <!-- EVENTI -->
 <div class="hero">
     <div class="hero-content text-center">
       <div class="max-w-md">
-        <h1 class="text-5xl font-bold">Prossimi 
-          <a class="text-primary" href="/eventi">Eventi</a>
-        </h1>
+        <h1 class="text-5xl font-bold">Prossimi Eventi</h1>
         {#if !data.cliente}
           <p class="text-xl">
             <a class="text-primary" href="/auth/login">Accedi</a> per registrarti agli eventi
@@ -26,7 +25,7 @@
 
   {#each eventi as evento}
     <div class="carousel-item">
-      <EventCard evento={evento} register={data.cliente} />
+      <EventCard evento={evento} register={data.cliente} bind:checked={checkboxs_checked}/>
     </div>
   {/each}
 </div>

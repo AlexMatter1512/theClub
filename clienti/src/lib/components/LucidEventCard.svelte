@@ -13,23 +13,17 @@
         updated: "Updated Date",
     }
 
-    evento.inizio = formatDate(new Date(evento.inizio));
-    evento.fine = formatDate(new Date(evento.fine));
-
+    $: evento.formatted_inizio = formatDate(new Date(evento.inizio))
+    $: evento.formatted_fine = formatDate(new Date(evento.fine))
 </script>
 
-<div class="card bg-base-100 image-full w-96 shadow-xl">
-    <figure>
-        <img
-        src={evento.poster}
-        alt="poster" />
-    </figure>
-    <div class="card-body">
-        <h2 class="card-title text-5xl">{evento.nome}</h2>
-        <div class="card-content mt-4 bg-opacity-50 bg-base-300 rounded-md p-4">
-        <p><b>Start:</b> {evento.inizio}</p>
-        <p><b>End:</b> {evento.fine}</p>
-        <p><b>At:</b> {evento.luogo}</p>
+<div class="bg-cover bg-center w-screen aspect-[9/13] shadow-xl rounded-xl overflow-hidden max-w-sm" style="background-image: url({evento.poster});">
+    <div class="p-4 flex flex-col justify-end h-full">
+        <div class="mt-4 bg-base-200 bg-opacity-90 rounded-lg p-4 border-2 border-neutral-content">
+            <h2 class="text-3xl font-bold mb-2">{evento.nome}</h2>
+            <p><span class="font-bold">Start:</span> {evento.formatted_inizio}</p>
+            <p><span class="font-bold">End:</span> {evento.formatted_fine}</p>
+            <p><span class="font-bold">At:</span> {evento.luogo}</p>
         </div>
     </div>
 </div>

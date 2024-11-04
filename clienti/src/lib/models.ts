@@ -1,1 +1,1 @@
-../../../models.ts
+export type * from '../../../common/script/models';

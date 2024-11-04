@@ -1,12 +1,14 @@
 <script lang="ts">
+    import { page } from '$app/stores';
 	import '../app.css';
 	export let data;
+	$: dashboard_link_name = $page.route.id === '/' ? 'The Club' : 'Eventi';
 </script>
 
 <div class="flex flex-col min-h-screen">
 	<nav class="navbar z-20">
 		<div class="flex-1">
-			<a href="/" class="btn normal-case text-xl">Eventi</a>
+			<a href="/" class="btn normal-case text-xl">{dashboard_link_name}</a>
 		</div>
 		<div class="flex-none">
 			{#if !data.cliente}
