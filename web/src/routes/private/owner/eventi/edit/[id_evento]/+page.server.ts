@@ -38,14 +38,17 @@ export const load = async ({ locals, params }) => {
 
 export const actions = {
     edit: async ({ locals, request, params }) => {
+        if (env.SERVER_DEBUG === "true") {
+            console.log("request: ", JSON.stringify(request, null, 2));
+        }
         const form = await superValidate(request, zod(eventSchema));
-        if (env.SERVER_DEBUG) console.log("form.data: ", form.data);
+        if (env.SERVER_DEBUG === "true") console.log("form.data: ", form.data);
         let updateObj = {
             ...form.data, // Spread the entire form.data object
             inizio: new Date(form.data.inizio), // Override inizio with the Date object
             fine: new Date(form.data.fine),     // Override fine with the Date object
         };
-        if (env.SERVER_DEBUG) console.log("updateObj: ", updateObj);
+        if (env.SERVER_DEBUG === "true") console.log("updateObj: ", updateObj);
         try {
             await locals.pb.collection("eventi").update(params.id_evento, updateObj);
         } catch (e) {
