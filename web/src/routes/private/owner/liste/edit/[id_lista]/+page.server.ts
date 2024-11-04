@@ -2,6 +2,7 @@ import type { Lista, Evento } from '$lib/models';
 import { listaSchema } from '$lib/schemas.js';
 import { message, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
+import { env } from '$env/dynamic/private';
 
 export const load = async ({ locals, params }) => {
     let lista = await locals.pb.collection("liste").getOne<Lista>(params.id_lista);
@@ -15,6 +16,7 @@ export const load = async ({ locals, params }) => {
 export const actions = {
     edit: async ({ locals, params, request }) => {
         const form = await superValidate(request, zod(listaSchema));
+        if (env.SERVER_DEBUG) console.log("form.data: ", form.data);
         if (!form.valid) {
             return message(form, {status:"fail", text:"Errore durante la validazione della lista"});
         }

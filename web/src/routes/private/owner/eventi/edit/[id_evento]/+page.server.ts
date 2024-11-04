@@ -3,6 +3,7 @@ import { eventSchema } from '$lib/schemas';
 import { correctDateString } from '$lib/utils.js';
 import { message, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
+import { env } from '$env/dynamic/private';
 
 export const load = async ({ locals, params }) => {
     let evento: Evento = await locals.pb.collection("eventi").getOne<Evento>(params.id_evento);
@@ -38,11 +39,13 @@ export const load = async ({ locals, params }) => {
 export const actions = {
     edit: async ({ locals, request, params }) => {
         const form = await superValidate(request, zod(eventSchema));
+        if (env.SERVER_DEBUG) console.log("form.data: ", form.data);
         let updateObj = {
             ...form.data, // Spread the entire form.data object
             inizio: new Date(form.data.inizio), // Override inizio with the Date object
             fine: new Date(form.data.fine),     // Override fine with the Date object
         };
+        if (env.SERVER_DEBUG) console.log("updateObj: ", updateObj);
         try {
             await locals.pb.collection("eventi").update(params.id_evento, updateObj);
         } catch (e) {
