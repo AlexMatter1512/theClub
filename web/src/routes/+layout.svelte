@@ -4,7 +4,7 @@
 
 	$: innerWidth = 0
 
-	let ring_class = data.user?.owner ? 'ring-2 ring-red-500' : 'ring-2 ring-primary'
+	$:ring_class = data.user?.owner ? 'ring-2 ring-red-500' : 'ring-2 ring-primary'
 	
 </script>
 <svelte:window bind:innerWidth />
@@ -51,7 +51,7 @@
 					<!-- svelte-ignore a11y-label-has-associated-control -->
 					<label tabindex="0" class="btn btn-ghost btn-circle avatar">
 						<div class="w-10 {ring_class} rounded-full">
-							<img src={data.user.avatar} alt="User avatar" />
+							<img src={data.user.avatar || `https://ui-avatars.com/api/?name=${data.user?.name}`} alt="User avatar" />
 						</div>
 					</label>
 					

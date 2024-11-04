@@ -33,7 +33,7 @@
     }
 </script>
 
-<SuperDebug data={$form} />
+<!-- <SuperDebug data={$form} /> -->
 
 <div class="hero">
     <div class="hero-content text-center">

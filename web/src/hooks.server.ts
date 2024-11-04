@@ -36,7 +36,7 @@ export async function handle({ event, resolve }) {
 
     // send back the default 'pb_auth' cookie to the client with the latest store state
     // TODO: remove the 'secure: false' option when deploying to a secure environment
-    response.headers.append('set-cookie', event.locals.pb.authStore.exportToCookie({secure: false, sameSite: 'lax'}));
+    response.headers.append('set-cookie', event.locals.pb.authStore.exportToCookie({secure: env.COOKIE_SECURE=="true" || false, sameSite: env.SAMESITE || 'lax'}));
 
     return response;
 }

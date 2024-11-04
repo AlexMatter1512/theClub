@@ -20,7 +20,7 @@
 					<!-- svelte-ignore a11y-label-has-associated-control -->
 					<label tabindex="0" class="btn btn-ghost btn-circle avatar">
 						<div class="w-10 rounded-full">
-							<img src={data.cliente.avatar} alt="cliente avatar" />
+							<img src={data.cliente.avatar || `https://ui-avatars.com/api/?name=${data.cliente?.name}`} alt="Avatar" />
 						</div>
 					</label>
 					

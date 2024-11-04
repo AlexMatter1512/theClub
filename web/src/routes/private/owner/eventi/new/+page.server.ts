@@ -16,9 +16,10 @@ export const actions = {
         };
         try {
             await locals.pb.collection("eventi").create(updateObj);
-        } catch (e) {
+        } catch (e: any) {
             console.error(e);
-            return message(form, {status:"fail", text:"Errore durante la creazione dell'evento"});
+            return message(form, {status:"fail", text:"Errore durante la creazione dell'evento: " + e.data?.message});
+            
         }
         return message(form, {status:"success", text:"Evento creato con successo"});
     }

@@ -12,5 +12,5 @@
 
 <div class="container">
     <h1>Thanks for Registering!</h1>
-    <p>Please wait for an owner to verify your account before you can access the dashboard.</p>
+    <p>Please wait for an owner to verify your account in order to access the dashboard.</p>
 </div>

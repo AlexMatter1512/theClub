@@ -41,3 +41,35 @@ export const listaSchema = z.object({
             .min(2, { message: 'Il nome del proprietario deve essere di almeno 2 caratteri' })
             .max(128, { message: 'Il nome del proprietario può essere lungo al massimo 128 caratteri' }),
 });
+
+export const userSchema = z.object({
+    name:
+        z.string({ required_error: 'Nome necessario' })
+            .min(2, { message: 'Il nome deve essere di almeno 2 caratteri' })
+            .max(128, { message: 'Il nome può essere lungo al massimo 128 caratteri' }),
+    surname:
+        z.string({ required_error: 'Cognome necessario' })
+            .min(2, { message: 'Il cognome deve essere di almeno 2 caratteri' })
+            .max(128, { message: 'Il cognome può essere lungo al massimo 128 caratteri' }),
+    email:
+        z.string({ required_error: 'Email necessaria' })
+            .email({ message: 'Email non valida' }),
+    password:
+        z.string({ required_error: 'Password necessaria' })
+            .min(8, { message: 'La password deve essere di almeno 8 caratteri' })
+            .max(128, { message: 'La password può essere lunga al massimo 128 caratteri' }),
+    passwordConfirm:
+        z.string({ required_error: 'Conferma password necessaria' })
+            .min(8, { message: 'La password deve essere di almeno 8 caratteri' })
+            .max(128, { message: 'La password può essere lunga al massimo 128 caratteri' }),
+});
+
+export const loginSchema = z.object({
+    email:
+        z.string({ required_error: 'Email necessaria' })
+            .email({ message: 'Email non valida' }),
+    password:
+        z.string({ required_error: 'Password necessaria' })
+            .min(8, { message: 'La password deve essere di almeno 8 caratteri' })
+            .max(128, { message: 'La password può essere lunga al massimo 128 caratteri' }),
+});
