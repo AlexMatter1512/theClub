@@ -15,6 +15,7 @@
     import { slide } from "svelte/transition";
     import { goto } from "$app/navigation";
     import { env } from "$env/dynamic/public";
+    import TextArea from "$lib/components/TextArea.svelte";
 
     export let data;
 
@@ -100,6 +101,13 @@
             bind:file={$file}
             required >
         </FileInput>
+        <TextArea
+            id="descrizione"
+            label="Descrizione"
+            bind:value={$form.descrizione}
+            errors={$errors.descrizione}
+            {...$constraints.descrizione}
+        />
         <div class="form-control mt-6">
             <button type="submit" class="btn btn-primary w-full"
                 >Aggiungi Evento</button

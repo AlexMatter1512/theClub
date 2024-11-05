@@ -4,7 +4,7 @@ import { formatDate } from '../../../../../common/script/utils';
 export const load = async ({locals}) => {
     let now = new Date().toISOString().replace("T", " ")
     let eventi = await locals.pb.collection("eventi").getList<Evento>(1, 5, {
-        filter: 'inizio > "' + now + '"',
+        filter: 'fine > "' + now + '"',
         sort: 'inizio',
     });
 

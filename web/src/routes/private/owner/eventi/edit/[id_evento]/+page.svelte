@@ -14,6 +14,7 @@
     import { page } from "$app/stores";
     import { env } from "$env/dynamic/public";
     import { slide } from "svelte/transition";
+    import TextArea from "$lib/components/TextArea.svelte";
 
     export let data;
     const { evento, listeEvento, iscrizioni_expanded } = data;
@@ -212,6 +213,14 @@
                 bind:value={$form.fine}
                 errors={$errors.fine}
                 {...$constraints.fine}
+            />
+
+            <TextArea
+                id="descrizione"
+                label="Descrizione"
+                bind:value={$form.descrizione}
+                errors={$errors.descrizione}
+                {...$constraints.descrizione}
             />
 
             <div class="form-control mt-6">

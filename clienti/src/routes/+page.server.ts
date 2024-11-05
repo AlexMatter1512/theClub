@@ -4,6 +4,7 @@ export const load = async ({locals}) => {
     let now = new Date().toISOString().replace("T", " ")
     let eventi = (await locals.pb.collection("eventi").getFullList<Evento>({
         filter: 'fine > "' + now + '"',
+        sort: 'inizio',
     }));
 
     for (let evento of eventi) {
