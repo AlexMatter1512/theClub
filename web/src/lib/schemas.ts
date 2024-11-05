@@ -28,7 +28,7 @@ export const eventSchema = z.object({
     
     descrizione:
         z.string()
-            .max(256, { message: 'La descrizione può essere lunga al massimo 128 caratteri' })
+            .max(2048, { message: 'La descrizione può essere lunga al massimo 2048 caratteri' })
             .optional(),
 
     poster: posterSchema,

@@ -8,7 +8,12 @@
 <div class="flex flex-col min-h-screen">
 	<nav class="navbar z-20">
 		<div class="flex-1">
-			<a href="/" class="btn normal-case text-xl">{dashboard_link_name}</a>
+			<a href="/" class="btn normal-case text-xl">
+				<div style="width: 35px; height: 35px;">
+					<img src="logo.gif" alt="Animated GIF" style="width: 100%; height: 100%;" />
+				</div>
+				{dashboard_link_name}
+			</a>
 		</div>
 		<div class="flex-none">
 			{#if !data.cliente}
