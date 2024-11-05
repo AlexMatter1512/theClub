@@ -38,6 +38,7 @@ export interface Evento {
     fine: string;
     poster: string;
     luogo: string;
+    descrizione: string;
     created: string;
     updated: string;
     formatted_inizio?: string;

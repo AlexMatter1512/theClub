@@ -22,7 +22,14 @@ export const eventSchema = z.object({
         z.string({ required_error: 'Data di inizio necessaria' }),
 
     luogo:
-        z.string({ required_error: 'Luogo necessario' }),
+        z.string({ required_error: 'Luogo necessario' })
+            .min(2, { message: 'Il luogo deve essere di almeno 2 caratteri' })
+            .max(128, { message: 'Il luogo può essere lungo al massimo 128 caratteri' }),
+    
+    descrizione:
+        z.string()
+            .max(256, { message: 'La descrizione può essere lunga al massimo 128 caratteri' })
+            .optional(),
 
     poster: posterSchema,
 });

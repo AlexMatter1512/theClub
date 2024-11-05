@@ -11,6 +11,8 @@
     const evento: Evento | undefined = data.evento;
     const listeEvento = data.listeEvento;
     const iscritto: boolean = data.iscritto;
+
+    console.log({ cliente, evento, listeEvento, iscritto });
 </script>
 
 {#if form?.status === 200}
@@ -24,6 +26,17 @@
         <LucidEventCard {evento} />
     </div>
 </div>
+{#if evento.descrizione !== ""}
+<div class="p-2">
+    <div class="collapse collapse-arrow bg-base-200">
+        <input type="checkbox" />
+        <div class="collapse-title text-xl font-medium">Info Evento</div>
+        <div class="collapse-content">
+            <p class="" style="white-space: pre-line;">{evento.descrizione}</p>
+        </div>
+    </div>
+</div>
+{/if}
 
 {#if listeEvento?.length < 1}
     <div class="text-center my-4">
@@ -84,7 +97,7 @@
             </div>
             </div>
         {:else}
-            <div class="flex flex-col items-center my-2">
+            <div class="flex flex-col items-center m-2">
                 <div class="flex justify-between text-xl font-medium bg-base-200 p-4 rounded-xl w-full max-w-md">
                     <span>{listaEvento.expand.lista.nome}</span>
                     <span class="text-error">Lista chiusa!</span>
