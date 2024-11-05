@@ -12,16 +12,7 @@ export const load = async () => {
 
 export const actions = {
 	register: async ({ locals, request }) => {
-		const { 
-			PHONE_VERIFICATION,
-			TWILIO_SID, 
-			TWILIO_AUTH_TOKEN, 
-			TWILIO_VERIFY_SERVICE,
-		} = env;
-		console.log('PHONE_VERIFICATION:', PHONE_VERIFICATION);
-		console.log('TWILIO_SID:', TWILIO_SID);
-		console.log('TWILIO_AUTH_TOKEN:', TWILIO_AUTH_TOKEN);
-		console.log('TWILIO_VERIFY_SERVICE:', TWILIO_VERIFY_SERVICE);
+		const { PHONE_VERIFICATION } = env;
 		const form = await superValidate(request, zod(registerUserSchema));
 
 		if (!form.valid) {
@@ -38,22 +29,22 @@ export const actions = {
 		try {
 			await locals.pb.collection('clienti').create({ username, ...formData });
 			await locals.pb.collection('clienti').authWithPassword(formData.email, formData.password);			
-		} catch (err) {
+		} catch (err: any) {
 			console.log('Error: ', err);
-			return message(form, 'Errore durante la registrazione', { status: 500 });
+			let errorList = err.originalError.data.data;
+			let errorString = '';
+			// for every object in the errorList, add the error message to the error object
+
+			for (const key in errorList) {
+				if (errorList.hasOwnProperty(key) && errorList[key].message) {
+				  errorString += key + ": " +errorList[key].message + ',\n';
+				  console.log(errorList[key].message);  // Logs only the "message" property
+				}
+			  }
+			return message(form, {status:"fail", text:"Errore durante la registrazione: " + errorString});
 		}
 		
 		if(PHONE_VERIFICATION === 'true') {
-			const client = twilio(TWILIO_SID, TWILIO_AUTH_TOKEN);
-			const verification = await client.verify.v2
-				.services(TWILIO_VERIFY_SERVICE)
-				.verifications.create({
-					channel: 'sms',
-					to: formData.phone
-				});
-
-			console.log(verification.status);
-
 			throw redirect(303, `/me/phone`);
 		}
 		throw redirect(303, '/');
