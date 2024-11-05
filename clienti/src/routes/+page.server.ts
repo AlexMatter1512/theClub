@@ -3,7 +3,7 @@ import type { Evento } from '$lib/models';
 export const load = async ({locals}) => {
     let now = new Date().toISOString().replace("T", " ")
     let eventi = (await locals.pb.collection("eventi").getFullList<Evento>({
-        filter: 'inizio > "' + now + '"',
+        filter: 'fine > "' + now + '"',
     }));
 
     for (let evento of eventi) {
