@@ -84,9 +84,9 @@
             </div>
             </div>
         {:else}
-            <div class="flex flex-col items-center px-4">
-                <div class="text-xl font-medium bg-base-200 p-2 rounded-xl w-full max-w-md">
-                    {listaEvento.expand.lista.nome}
+            <div class="flex flex-col items-center my-2">
+                <div class="flex justify-between text-xl font-medium bg-base-200 p-4 rounded-xl w-full max-w-md">
+                    <span>{listaEvento.expand.lista.nome}</span>
                     <span class="text-error">Lista chiusa!</span>
                 </div>
             </div>
