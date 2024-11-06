@@ -12,7 +12,7 @@ export const load = async () => {
 
 export const actions = {
 	register: async ({ locals, request }) => {
-		const { PHONE_VERIFICATION } = env;
+		const { PHONE_VERIFICATION, MAIL_VERIFICATION } = env;
 		const form = await superValidate(request, zod(registerUserSchema));
 
 		if (!form.valid) {

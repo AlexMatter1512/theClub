@@ -5,8 +5,8 @@ export interface User {
     name: string;
     surname: string;
     password: string;
-    createdAt: string;
-    updatedAt: string;
+    created: string;
+    updated: string;
     avatar: string;
     verified: boolean;
     owner: boolean;

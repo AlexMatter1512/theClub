@@ -1,8 +1,12 @@
 <script lang="ts">
     import { page } from '$app/stores';
 	import '../app.css';
+	import { env } from '$env/dynamic/public';
+
 	export let data;
-	$: dashboard_link_name = $page.route.id === '/' ? 'The Club' : 'Eventi';
+	const orgName = env.PUBLIC_ORG_NAME || 'Club';
+	$: dashboard_link_name = $page.route.id === '/' ? orgName : 'Eventi';
+
 </script>
 
 <div class="flex flex-col min-h-screen">
@@ -10,7 +14,7 @@
 		<div class="flex-1">
 			<a href="/" class="btn normal-case text-xl">
 				<div style="width: 35px; height: 35px;">
-					<img src="logo.gif" alt="Animated GIF" style="width: 100%; height: 100%;" />
+					<img src="/logo.gif" alt="Animated GIF" style="width: 100%; height: 100%;" />
 				</div>
 				{dashboard_link_name}
 			</a>

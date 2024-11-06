@@ -1,10 +1,12 @@
 <script>
 	import '../app.css';
+	import { env } from '$env/dynamic/public';
 	export let data;
 
 	$: innerWidth = 0
-
 	$:ring_class = data.user?.owner ? 'ring-2 ring-red-500' : 'ring-2 ring-primary'
+
+	const orgName = env.PUBLIC_ORG_NAME || 'Club';
 	
 </script>
 <svelte:window bind:innerWidth />
@@ -12,7 +14,7 @@
 <div class="min-h-full">
 	<nav class="navbar">
 		<div class="flex-1">
-			<a href="/" class="btn btn-ghost normal-case text-xl">The Club Admin</a>
+			<a href="/" class="btn btn-ghost normal-case text-xl">{orgName} Admin</a>
 		</div>
 		<div class="flex-none">
 			{#if !data.user}

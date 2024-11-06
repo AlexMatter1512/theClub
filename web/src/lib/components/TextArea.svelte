@@ -14,7 +14,7 @@
 		<span class="label-text">{label}</span>
 	</label>
 	<textarea
-		class="textarea textarea-bordered w-full max-w-lg"
+		class="textarea textarea-bordered w-full max-w-lg  h-48"
 		{placeholder}
 		{required}
 		{disabled}
