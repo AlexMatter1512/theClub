@@ -7,20 +7,20 @@ In its current state, the platform language is only in Italian.
 
 - [🪩 Club Event Management Platform](#-club-event-management-platform)
   - [🌐 Sections Overview](#-sections-overview)
-    - [🔐 Admin Section](#-admin-section)
-      - [**Roles**:](#roles)
-      - [**QR Code Scanning**:](#qr-code-scanning)
-      - [**Event Management**:](#event-management)
-      - [**List Management**:](#list-management)
+  - [🔐 Admin Section](#-admin-section)
+    - [**Roles**:](#roles)
+    - [**QR Code Scanning**:](#qr-code-scanning)
+    - [**Event Management**:](#event-management)
+    - [**List Management**:](#list-management)
   - [🎟️ Client Section](#️-client-section)
-      - [Features](#features)
+    - [Features](#features)
   - [⚙️ Technical Details](#️-technical-details)
     - [🛠 Tech Stack](#-tech-stack)
     - [🚀 Getting Started](#-getting-started)
       - [Prerequisites](#prerequisites)
       - [Installation](#installation)
       - [Running the Project (Development)](#running-the-project-development)
-      - [Build for Production](#build-for-production)
+    - [Build for Production](#build-for-production)
     - [🌐 Deployment](#-deployment)
   - [... (Work in progress)](#-work-in-progress)
 
@@ -42,19 +42,19 @@ _**List based events**_: Each event can have multiple event_lists, clients can o
 
 _**QR Code Generation/Scanning**_: Upon subscribing to an event, clients receive a unique QR code that can be scanned by staff to let them enter the event.
 
-### 🔐 Admin Section
+## 🔐 Admin Section
 Administrators have access to comprehensive tools to manage the event lifecycle, user roles, permissions, and more:
 
-#### **Roles**:
+### **Roles**:
 The admin section currently supports three roles:
 - **Owner**: Full access to all features, including events and user roles management, client qr code scanning, and more.
 - **Staff**: Can only scan client qr codes to let them enter events.
 - **Unverified Users (Waitlist)**: Users who registered using the registration form but have not been verified by an owner are placed in the waitlist, in the meantime they **can't** access the admin section.
   
-#### **QR Code Scanning**: 
+### **QR Code Scanning**: 
 Staff can scan client QR codes to let them enter events. 
 
-#### **Event Management**:
+### **Event Management**:
 - **Create Events**: Administrators can add detailed event information, such as:
   - Event name, 
   - Description, 
@@ -70,7 +70,7 @@ Staff can scan client QR codes to let them enter events.
 - **Add/Remove Lists**: Quickly add or remove a list from an event.
 - **Open/Close Lists**: Owners can open or close lists for an event, allowing clients to subscribe or not. To close a list, owners can set a closing date and time or close it manually.
 
-#### **List Management**:
+### **List Management**:
 - **Create Lists**: Admins can create lists for events, each with:
   - List name,
   - List description,
@@ -80,7 +80,7 @@ Staff can scan client QR codes to let them enter events.
 ## 🎟️ Client Section
 This is where club members can explore and register for events.
 
-#### Features
+### Features
 - **Optional Verification**: Users could be required to verify their phone number or email address before subscribing to events.
 - **Event Discovery**: Browse all upcoming events (even if not subscribed) to find interesting activities. users will see comprehensive event informations, including description, timing, and location.
 - **Subscription Options**: Users can quickly subscribe to events by selecting an opened list from the event.
@@ -132,7 +132,7 @@ To set up this project locally, follow these steps:
 1. **Start PocketBase**
 2. **Run both web and clienti Dev Servers**
 
-#### Build for Production
+### Build for Production
 To build and optimize the app for production, run:
 ```bash
 npm run build
