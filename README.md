@@ -5,6 +5,26 @@ This is a **SvelteKit** based platform for managing and subscribing to club even
 
 In its current state, the platform language is only in Italian.
 
+- [🪩 Club Event Management Platform](#-club-event-management-platform)
+  - [🌐 Sections Overview](#-sections-overview)
+    - [🔐 Admin Section](#-admin-section)
+      - [**Roles**:](#roles)
+      - [**QR Code Scanning**:](#qr-code-scanning)
+      - [**Event Management**:](#event-management)
+      - [**List Management**:](#list-management)
+  - [🎟️ Client Section](#️-client-section)
+      - [Features](#features)
+  - [⚙️ Technical Details](#️-technical-details)
+    - [🛠 Tech Stack](#-tech-stack)
+    - [🚀 Getting Started](#-getting-started)
+      - [Prerequisites](#prerequisites)
+      - [Installation](#installation)
+      - [Running the Project (Development)](#running-the-project-development)
+      - [Build for Production](#build-for-production)
+    - [🌐 Deployment](#-deployment)
+  - [... (Work in progress)](#-work-in-progress)
+
+
 
 ## 🌐 Sections Overview
 The platform has two main sections:
@@ -16,7 +36,7 @@ The platform has two main sections:
 ---
 Some of the key features include:
 
-_**Mail/Phone Verification**_: Owners can decide if Clients must verify their phone number or email address before subscribing to events.
+_**Mail/Phone Verification**_: [Owners](#roles) can decide if [Clients](#roles) must verify their phone number or email address before subscribing to events.
 
 _**List based events**_: Each event can have multiple event_lists, clients can only subscribe to event_lists, not directly to events. The same list (name, description and PR) can be used in multiple events (of course with different clients: a list in an event is an "event_list").
 
