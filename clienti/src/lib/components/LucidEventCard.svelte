@@ -8,6 +8,7 @@
         inizio: "Event Date",
         fine: "Event end Date",
         luogo: "Event Location",
+        descrizione: "Event Description",
         poster: "",
         created: "Created Date",
         updated: "Updated Date",

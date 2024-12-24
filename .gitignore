@@ -1,6 +1,7 @@
 node_modules
 
 backend/
+.vscode/
 
 # Output
 .output
